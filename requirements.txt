@@ -1,0 +1,14 @@
+# Core dependencies for AI Bible App (based on actual imports)
+Django>=5.2.3
+pymilvus>=2.5.11
+torch>=2.7.1
+transformers>=4.52.4
+nltk>=3.9.1
+requests>=2.32.4
+beautifulsoup4>=4.13.4
+ollama>=0.5.1
+numpy>=2.3.0
+
+# Optional: If you need specific embedding models or additional AI features
+# sentence-transformers>=4.1.0
+# gunicorn==23.0.0

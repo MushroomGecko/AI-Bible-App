@@ -1,0 +1,250 @@
+/* MOBILE SPECIFIC */
+
+html {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch; /* Adds native bounce and momentum scrolling */
+}
+body {
+    position: relative; /* Helps to fix layout shifting in some cases */
+    padding-top: constant(safe-area-inset-top); /* Fallback for older versions */
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: constant(safe-area-inset-bottom);
+    padding-bottom: env(safe-area-inset-bottom);
+}
+@media (hover: none) {
+    button:hover, .button-container:hover {
+        background-color: inherit; /* Removes hover effects for touch screens */
+    }
+}
+body, #main {
+    padding-bottom: 100px; /* Add basic padding as a fallback */
+    padding-bottom: calc(100px + env(safe-area-inset-bottom)); /* Add padding plus safe area inset */
+    padding-bottom: calc(100px + constant(safe-area-inset-bottom)); /* Older iOS fallback */
+    box-sizing: border-box; /* Ensure padding doesn't affect width */
+}
+
+
+
+
+/* GENERAL SETTINGS */
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+/* WORDS OF JESUS STYLING */
+.wj {
+    color: red;
+}
+
+
+
+
+/* NOTE BOX */
+
+#notes {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100dvh; /* Full viewport height */
+    background-color: #f0f0f0;
+    border-left: 1px solid #ccc;
+    padding: 10px;
+    box-sizing: border-box;
+    overflow-y: auto; /* Makes #main scrollable */
+}
+
+/* Basic styling for textarea */
+#notesInput {
+    width: 100%;
+    height: 100%;
+    resize: none;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+    padding: 10px;
+    font-size: 16px;
+}
+
+#notes button {
+    width: 100%; /* Makes the button span the entire width of its container */
+}
+
+
+
+
+
+/* MAIN CONTAINER CONTENT */
+
+#main {
+    position: fixed;
+    height: calc(100vh - constant(safe-area-inset-bottom)); /* Fallback for older Safari */
+    height: calc(100vh - env(safe-area-inset-bottom));
+    width: auto;
+    overflow-y: auto; /* Makes #main scrollable */
+}
+
+#inner-main {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+
+
+
+
+/* CONTAINER FOR STICKY MENU */
+
+.static-container {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0; /* Sticks to the top of #main */
+    background-color: #fff;
+    color: #000;
+    z-index: 1000; /* Ensures it stays above other elements */
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+
+
+
+
+/* HIGHLIGHT SETTINGS */
+
+.highlight {
+    background-color: yellow;
+}
+
+
+
+
+
+/* SETTINGS FOR DROPDOWN SELECT */
+
+select {
+    font-size: 18px;
+}
+
+
+
+
+
+/* BUTTON SETTINGS */
+
+.button-container {
+    display: flex;
+    justify-content: space-between; /* Align items to the far left and right */
+}
+
+button {
+    font-size: 18px;
+}
+
+#bottom-buttons {
+    padding-bottom: 10px;
+    padding-top: 10px
+}
+
+
+
+
+
+/* SECTION FOR SCRIPTURE */
+
+.scrollable-paragraph {
+    position: relative;
+    font-size: 20px;
+    border: 1px solid #ccc;
+    height: auto;
+}
+
+/* Canvas styling for drawing */
+#drawing-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    pointer-events: none; /* Prevent interference with scrolling */
+}
+
+
+
+
+
+/* POPUP FOR IMAGE SEARCH */
+
+/* Modal overlay styling */
+.modal-overlay {
+  display: none; /* Hidden by default */
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.8); /* Dark overlay */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Modal content box */
+.modal-content {
+  position: relative;
+  width: 80%;
+  max-width: 600px;
+  background-color: #fff;
+  border-radius: 8px;
+  overflow-y: auto; /* Scrollable */
+  max-height: 70vh;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Close button */
+.modal-close-btn {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 30px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+/* Scrollable image container for the modal */
+.modal-image-container {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  max-height: 70vh;
+}
+
+/* Individual image styling */
+.modal-image {
+  width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+  border-radius: 4px;
+}
+
+
+
+
+
+/* POPUP FOR HIGHLIGHT BUTTONS */
+
+#popup {
+    display: none; /* Initially hidden */
+    position: absolute;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+} 

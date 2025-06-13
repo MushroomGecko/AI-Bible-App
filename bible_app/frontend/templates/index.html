@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Bible App</title>
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+<body>
+    <div id="main">
+        <div id="inner-main">
+            <div class="static-container">
+                <div>
+                    <h1 class="center">
+                        {{ book }} {{ chapter }}
+                    </h1>
+                    <select id="version">
+                        {% for version_type in version_selection %}
+                        <option value="{{ version_type }}" {% if version_type == version %}selected{% endif %}>{{ version_type }}</option>
+                        {% endfor %}
+                    </select>
+                    <select id="book">
+                        {% for book_option in selection %}
+                        <option value="{{ book_option }}" {% if book_option == book %}selected{% endif %}>{{ book_option }}</option>
+                        {% endfor %}
+                    </select>
+                    <select id="chapter">
+                        <!-- Chapters will be populated by script.js -->
+                    </select>
+                </div>
+
+                <br>
+
+                <div class="button-container">
+                    <div id="highlightButtons">
+                        <button id="explainButton" disabled>Explain</button>
+                        <button id="defineButton" disabled>Define</button>
+                        <button id="selectedQuestionButton" disabled>Ask</button>
+                        <button id="imageButton" disabled>Images</button>
+                        <button id="mapButton" disabled>Map</button>
+                    </div>
+                    <div id="generalButtons">
+                        <button id="questionButton">Ask Question</button>
+                        <button id="chapterSummaryButton">Chapter Summary</button>
+                    </div>
+                    <div id="markupButtons">
+                        <button id="highlightButton">Color</button>
+                        <div>
+                            <label>
+                                <input type="checkbox" id="toggle-drawing">
+                                Enable Drawing
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <!--
+                <div id="popup">
+                    <button id="explainButton">Explain</button>
+                    <button id="defineButton">Define</button>
+                    <button id="selectedQuestionButton">Ask</button>
+                    <button id="imageButton">Images</button>
+                    <button id="mapButton">Map</button>
+                </div>
+                -->
+                <br>
+                <div class="button-container">
+                    <button class="previousButton"><--</button>
+                    <button class="nextButton">--></button>
+                </div>
+            </div>
+
+            <br>
+            <div class="scrollable-paragraph">
+                {% for verse in verses %}
+                    <p id="p-{{ forloop.counter }}">
+                        {{ verse|safe }}<br>
+                    </p>
+                {% endfor %}
+                <canvas id="drawing-canvas"></canvas>
+            </div>
+
+            <div id="bottom-buttons">
+                <div class="button-container">
+                    <button class="previousButton"><--</button>
+                    <button id="quizButton">Quiz</button>
+                    <button class="nextButton">--></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="notes">
+        {% for book_key_in_loop in selection %}
+            <a href="/{{ book_key_in_loop }}-1-{{ version }}">
+                <button value="{{ book_key_in_loop }}">{{ book_key_in_loop|cut:" "|slice:":5" }}</button>
+            </a>
+            <br>
+        {% endfor %}
+
+
+        <!--
+        <textarea id="notesInput" placeholder="Notes..."></textarea>
+        -->
+    </div>
+
+    {{ selection|json_script:"bibleDataJSON" }}
+    {{ in_order|json_script:"bookNamesJSON" }}
+
+    <script>
+        window.INITIAL_BOOK = '{{ book }}';
+        window.INITIAL_CHAPTER = '{{ chapter }}';
+        window.INITIAL_VERSION = '{{ version }}';
+    </script>
+    <script src="../static/script.js" defer></script>
+
+</body>
+</html>
