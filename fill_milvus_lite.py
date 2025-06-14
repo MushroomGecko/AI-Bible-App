@@ -3,10 +3,10 @@ import os
 import sys
 
 # Add the bible_app modules to path
-sys.path.append(os.path.join(os.path.dirname(__file__), 'bible_app', 'ai_api'))
+sys.path.append(os.path.join(os.path.dirname(__file__), 'src', 'ai_api'))
 
-from bible_app.ai_api import embedding
-from bible_app.ai_api import milvuslitebible
+from src.ai_api.rag import embedding
+from src.ai_api.rag import milvuslitebible
 from pymilvus import MilvusClient
 
 dbname = 'milvuslitebible'
@@ -16,10 +16,10 @@ def parse_text(text):
     return text.replace('<span class="wj">', '').replace('</span>', '')
 
 # Simple database path
-db_path = f"bible_app/ai_api/vectordbs/{dbname}.db"
+db_path = f"src/ai_api/vectordbs/{dbname}.db"
 client = MilvusClient(db_path) if os.path.exists(db_path) else None
 if not client or not client.list_collections():
-    bible_data_path = "bible_app/frontend/bible_data/web"
+    bible_data_path = "src/frontend/bible_data/web"
     
     id_count = 0
     

@@ -1,0 +1,44 @@
+Based on the following context, generate a valid JSON object for a Bible quiz.
+
+The JSON object must follow these rules:
+1. Each key must be a question derived from the context.
+2. Each value must be a dictionary with:
+	- 'options': A dictionary containing exactly 4 keys: 'A', 'B', 'C', 'D'. Each key must have a potential answer as its value.
+	- 'answer': The correct answer (one of 'A', 'B', 'C', 'D') based on the context.
+
+Output Rules:
+	- The output must be a valid JSON object with no extra text, explanations, or formatting like ```json or ###Quiz Question.
+	- Ensure the questions and answers are derived strictly from the context.
+    - Questions must not use generic names like "Question 1" or "Quiz Question."
+    - Answers must stay within the boundaries of the context. Do not invent answers or questions.
+    - There should be 1 objectively correct answer and 3 objectively wrong answers in your 'options'.
+
+Here is an example of the required format:
+{{
+	"What was the first miracle Jesus performed?": {{
+		"options": {{
+			"A": "Turning water into wine",
+			"B": "Feeding the 5,000",
+			"C": "Healing a blind man",
+			"D": "Walking on water"
+		}},
+		"answer": "A"
+	}},
+	"Where did Jesus perform his first miracle?": {{
+		"options": {{
+			"A": "Cana",
+			"B": "Bethlehem",
+			"C": "Jerusalem",
+			"D": "Nazareth"
+		}},
+		"answer": "A"
+	}}
+}}
+
+NOTE: Do NOT use the above example questions in your generated questions. The above example is just a format example.
+
+Context:
+	{contextual_text}
+
+Now generate 3 quiz questions in the JSON format described above.
+Response:

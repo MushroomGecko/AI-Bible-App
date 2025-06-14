@@ -502,7 +502,7 @@ function handleQuiz()
 
         // Parse the JSON response
         try {
-            quizData = JSON.parse(data.message);
+            quizData = data.message;
             // alert(quizData);
         }
         catch (error) {
@@ -542,7 +542,7 @@ function handleQuiz()
                 }
 
                 // Send results to the server
-                fetch('/submit_quiz', {
+                fetch('/api/submit_quiz/', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'

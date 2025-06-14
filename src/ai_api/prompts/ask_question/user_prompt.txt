@@ -1,0 +1,11 @@
+Below is some potential additional context verses that could be helpful for explaining a user's question:
+{contextual_text}
+
+In just a single sentence, answer the following user's question given the above context.
+In your answer do not reference any specific verses except for the ones given in this prompt.
+If you use any of the above Biblical context, properly reference it.
+User's question: {user_query}
+
+Now write your answer to the user's question using the above context.
+
+Response:

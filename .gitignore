@@ -1,5 +1,6 @@
 # Project specific stuff:
 milvuslitebible.db
+milvuslitebible.db.lock
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

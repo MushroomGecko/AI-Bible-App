@@ -1,0 +1,5 @@
+Summarize the following Biblical Scripture from chapter {chapter} of the book of {book}:
+{contextual_text}
+
+Now summarize the above Scripture.
+Response:

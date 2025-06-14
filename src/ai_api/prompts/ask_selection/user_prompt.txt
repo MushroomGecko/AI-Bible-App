@@ -1,0 +1,15 @@
+Below is some potential additional context verses that could be helpful for explaining a later question from a user:
+{contextual_text}
+
+Below is the full Bible verse context from where the user's question originated:
+"{full_context}" - {book} {chapter}:{verse}
+
+In just a single sentence, answer the following question given the above Biblical context.
+If you use any of the above Biblical context, properly reference it.
+In your answer do not reference any specific verses except for the ones given in this prompt.
+
+Section the user highlighted and has questions about: "{selected_text}" from {book} {chapter}.
+User's question: {user_query}
+Now write your answer to the user's question using the above context.
+
+Response:

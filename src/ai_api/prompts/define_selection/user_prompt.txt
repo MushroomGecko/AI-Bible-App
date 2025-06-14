@@ -1,0 +1,14 @@
+You will soon define "{selected_text}" from the Bible, but before you do that, below are some verses with some potential additional context to provide context clues about what the word or phrase means:
+{contextual_text}
+
+Below is the full Bible verse context from where "{selected_text}" originated:
+"{full_context}" - {book} {chapter}:{verse}
+
+{dictionary_context_str}
+
+Instruction:
+If you use any of the above Biblical context in your answer, properly reference it.
+In your answer do not reference any specific verses except for the ones given in this prompt.
+Define the word or phrase "{selected_text}" given the Biblical and dictionary context above.
+
+Response:
