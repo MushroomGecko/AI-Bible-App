@@ -14,6 +14,8 @@ def get_database(database_name):
 
 
 def create_collection(collection_name, database_name, embeddings, metric):
+    # Create the database directory if it doesn't exist
+    os.makedirs(f"ai_api/vectordbs", exist_ok=True)
     # Define fields for collection, including a text field
     db_path = f"ai_api/vectordbs/{database_name}.db"
     milvus_client = MilvusClient(db_path)
