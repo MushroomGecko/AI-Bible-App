@@ -210,6 +210,16 @@ selectedQuestionButton.addEventListener("touchstart", () => {
     handleSelectedQuestion(); // Prevent clearing selection
 });
 
+// CROSS REFERENCE
+crossReferenceButton.addEventListener("mousedown", () => {
+    // popup.style.display = "none";
+    handleCrossReference(); // Prevent clearing selection
+});
+crossReferenceButton.addEventListener("touchstart", () => {
+    // popup.style.display = "none";
+    handleCrossReference(); // Prevent clearing selection
+});
+
 // QUIZ
 quizButton.addEventListener("mousedown", () => {
     // popup.style.display = "none";
@@ -468,6 +478,49 @@ function handleSelectedQuestion()
     }
 }
 
+
+
+
+// CROSS REFERENCE
+// Cross reference selected data
+function handleCrossReference()
+{
+    if (persistText.toString())
+    {
+        alert("Please be patient as your response generates.")
+
+        // Send the selected text to the server
+        fetch('/api/cross_reference/',
+        {
+            method: 'POST',
+            headers:
+            {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ selected_text: selectedText.toString()})
+        })
+        // Get JSON from the server's response
+        .then(response => response.json())
+        // Get the "message" key from the server's JSON response
+        .then(data =>
+        {
+            // selectedText.empty();
+            // selectedText.removeAllRanges();
+            alert(data.message);
+        })
+        // Display error message to user if something went wrong with POST request
+        .catch(error =>
+        {
+            console.error('Error:', error);
+        });
+    
+        // Make sure the user selected some text
+    }
+    else
+    {
+        alert("Please highlight some text before clicking the button.");
+    }
+}
 
 
 

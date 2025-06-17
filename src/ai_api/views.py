@@ -169,6 +169,30 @@ def ask_selection_view(request):
     except Exception as e:
         print(f"Error in ask_selection_view: {e}")
         return JsonResponse({'error': str(e)}, status=500)
+    
+@csrf_exempt
+@require_POST
+def cross_reference_view(request):
+    try:
+        data = json.loads(request.body)
+        selected_text = str(data.get('selected_text', '')).strip()
+        print(f"(CROSS_REFERENCE) Received text: {selected_text}")
+
+        milvus_client = milvuslitebible.get_database(MILVUS_DB_NAME)
+        milvus_returns = milvuslitebible.search_collection(query=selected_text, client=milvus_client, collection_name=MILVUS_COLLECTION_NAME, metric='L2')
+        milvus_client.close()
+
+        contextual_text = ""
+        for res in milvus_returns:
+            contextual_text += f'"{res["text"]}" - {res["title"]}\n'
+        
+        print(f"(CROSS_REFERENCE) Contextual text: {contextual_text}")
+        return JsonResponse({'message': contextual_text})
+    
+    except Exception as e:
+        print(f"Error in cross_reference_view: {e}")
+        return JsonResponse({'error': str(e)}, status=500)
+            
 
 @csrf_exempt
 @require_POST
