@@ -16,8 +16,10 @@ def parse_text(text):
     return text.replace('<span class="wj">', '').replace('</span>', '')
 
 # Simple database path
-db_path = f"src/ai_api/vectordbs/{dbname}.db"
-client = MilvusClient(db_path) if os.path.exists(db_path) else None
+db_path = f"src/ai_api/vectordbs/"
+db_location = f"{db_path}/{dbname}.db"
+os.makedirs(os.path.dirname(db_path), exist_ok=True)
+client = MilvusClient(db_location) if os.path.exists(db_location) else None
 if not client or not client.list_collections():
     bible_data_path = "src/frontend/bible_data/web"
     
@@ -55,7 +57,7 @@ if not client or not client.list_collections():
                 
                 # Create collection if it doesn't exist
                 if not client or not client.list_collections():
-                    client = MilvusClient(db_path)
+                    client = MilvusClient(db_location)
                     client.create_collection(cname, dimension=embeddings.shape[1], metric_type='L2')
                     print(f'Collection {cname} does not exist. Created collection {cname}.')
                 
@@ -64,6 +66,6 @@ if not client or not client.list_collections():
                 print(f'Inserted {book_name} {chapter_num}')
 else:
     print(client.list_collections())
-    client = MilvusClient(db_path)
+    client = MilvusClient(db_location)
     print(milvuslitebible.search_collection(query='In the beginning God created the heavens and the earth.', client=client, collection_name=cname, metric='L2'))
     client.close()
