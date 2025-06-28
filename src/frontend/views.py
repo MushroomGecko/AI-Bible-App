@@ -22,7 +22,7 @@ IN_ORDER_BOOKS = [
     "3 John", "Jude", "Revelation"
 ]
 
-VERSION_SELECTION = ['web']
+VERSION_SELECTION = ['web', 'bsb']
 
 # bible_data is in the frontend directory
 BIBLE_DATA_ROOT = Path(settings.BASE_DIR) / 'frontend' / 'bible_data'
@@ -64,7 +64,11 @@ def bible_book_view(request, book, chapter, version):
             # and values are verse text with HTML markup already included
             for verse_num, verse_text in json_data.items():
                 # The text is already properly formatted, no parsing needed
-                verses.append(f'{verse_num}) {verse_text}')
+                try:
+                    # This should fail if verse_num is not an int (i.e. header_1, header_2, etc.)
+                    verses.append(f'{int(verse_num)}) {verse_text}')
+                except Exception as e:
+                    verses.append(f'<span class="header">{verse_text}</span>')
 
         context = {
             'verses': verses,
